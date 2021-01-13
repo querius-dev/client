@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "querius"
+version = "0.1.0"
+description = "Client library for connecting with the Querius API"
+authors = ["Theo Windebank <theo@getquerius.com>"]
+license = "Apache-2.0"
+readme = "README.md"
+homepage = "https://getquerius.com"
+repository = "https://github.com/querius-dev/client"
+keywords = ["querius", "bigquery", "query", "optimisation", "api"]
+classifiers = []
+include = [
+    "LICENSE",
+]
+
+
+[tool.poetry.dependencies]
+python = ">=3.7,<3.9"
+loguru = ">=0.5, <0.6"
+google-auth = ">=1.5, <2.0"
+wrapt-timeout-decorator = "^1.3.1"
+google-cloud-bigquery = ">=1.5.0, <=2.*.*"
+
+[tool.poetry.dev-dependencies]
+pytest = ">=6.0.0, <7.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
