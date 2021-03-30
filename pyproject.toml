@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "querius"
-version = "0.1.1"
+version = "0.1.2"
 description = "Client library for connecting with the Querius API"
 authors = ["Theo Windebank <theo@getquerius.com>"]
 license = "Apache-2.0"

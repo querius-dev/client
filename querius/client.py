@@ -12,7 +12,7 @@ from google.oauth2 import service_account
 from wrapt_timeout_decorator import timeout
 from loguru import logger
 
-from querius.secretmanager import get_secret
+from querius.secretmanager import get_secret_json
 
 
 def safe_and_quick(func: Callable = None, return_on_fail: Any = None):
@@ -40,23 +40,18 @@ class QueriusClient:
     @classmethod
     def from_gcp_secret_manager(
             cls,
+            api_url: str,
+            timeout_seconds: str,
             secret_project: str,
             secret_name: str,
             secret_version: str = 'latest',
     ) -> Optional:
-        secret = get_secret(secret_project, secret_name, secret_version)
-        if not secret:
+        config = get_secret_json(secret_project, secret_name, secret_version)
+        if not config:
             return
-        return cls.from_json_config(**secret)
-
-    @classmethod
-    def from_json_config(
-            cls,
-            config: str
-    ):
-        """Config must match method signature of `cls.from_service_account_info`."""
-        parsed = json.loads(config)
-        return cls.from_service_account_info(**parsed)
+        config['api_irl'] = api_url
+        config['timeout_seconds'] = timeout_seconds
+        return cls.from_service_account_info(**config)
 
     @classmethod
     def from_service_account_info(
