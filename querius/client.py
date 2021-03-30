@@ -41,7 +41,7 @@ class QueriusClient:
     def from_gcp_secret_manager(
             cls,
             api_url: str,
-            timeout_seconds: str,
+            timeout_seconds: int,
             secret_project: str,
             secret_name: str,
             secret_version: str = 'latest',
@@ -49,7 +49,7 @@ class QueriusClient:
         config = get_secret_json(secret_project, secret_name, secret_version)
         if not config:
             return
-        config['api_irl'] = api_url
+        config['api_url'] = api_url
         config['timeout_seconds'] = timeout_seconds
         return cls.from_service_account_info(**config)
 
