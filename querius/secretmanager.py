@@ -11,7 +11,7 @@ def get_secret_json(project: str, name: str, version: str) -> Optional[dict]:
     try:
         client = secretmanager.SecretManagerServiceClient()
         response = client.access_secret_version(name=fqn)
-        decoded = response.payload.data.decode('UTF-8')
+        decoded = response.payload.data.decode('unicode_escape')
         return json.loads(decoded)
     except Exception as e:
         logger.error(f"Failed to get secret '{fqn}': {repr(e)}")
