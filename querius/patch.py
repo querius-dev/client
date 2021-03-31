@@ -11,7 +11,7 @@ def patch_bq_client_with_querius_client(bq_client: Client, qs_client: QueriusCli
     orig_query_method = bq_client.query
 
     def query(query_str: str, *query_args, **query_kwargs) -> QueryJob:
-        if 'project' in query_kwargs:
+        if query_kwargs.get('project') is not None:
             logger.warning("'project' argument passed to query method, not routing.")
             return orig_query_method(query_str, *query_args, **query_kwargs)
 
