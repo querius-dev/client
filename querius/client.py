@@ -9,7 +9,7 @@ from google.auth.transport.requests import AuthorizedSession
 from google.cloud import bigquery
 from google.cloud.bigquery import QueryJob
 from google.oauth2 import service_account
-from wrapt_timeout_decorator import timeout
+from timeout_decorator import timeout
 from loguru import logger
 
 from querius.secretmanager import get_secret_json
